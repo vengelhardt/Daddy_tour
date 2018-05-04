@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Génération du fichier overlay"
+dtc -O dtb -o Tour_Daddy-00A0.dtbo -b 0 -@ Tour_Daddy.dts
+sudo cp Tour_Daddy-00A0.dtbo /lib/firmware/
+
+
