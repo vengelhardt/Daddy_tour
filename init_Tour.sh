@@ -17,7 +17,7 @@ echo Tour_Daddy | sudo tee $SLOTS
 export LCD_FILE=/usr/share/gmoccapy_lcd7
 if [ ! -d "$LCD_FILE" ]; then
   echo "Installation de l ecran"
-	git clone https://github.com/vichente1/gmoccapy_lcd7.git
+	git clone https://github.com/vichente1/gmoccapy_lcd7.git &&
 	cd gmoccapy_lcd7/
 	sudo cp bin/gmoccapy_lcd7 /usr/bin/
 	sudo chmod a+x /usr/bin/gmoccapy_lcd7
