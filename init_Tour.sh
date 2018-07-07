@@ -14,9 +14,25 @@ export GPIO=/sys/class/gpio
 echo Chargement de la cape
 echo Tour_Daddy | sudo tee $SLOTS
 
+export LCD_FILE=/usr/share/gmoccapy_lcd7
+if [ ! -d "$LCD_FILE" ]; then
+  echo "Installation de l ecran"
+	git clone https://github.com/vichente1/gmoccapy_lcd7.git
+	cd gmoccapy_lcd7/
+	sudo cp bin/gmoccapy_lcd7 /usr/bin/
+	sudo chmod a+x /usr/bin/gmoccapy_lcd7
+	sudo cp -r share/gmoccapy_lcd7/ /usr/share/
+	sudo apt-get update
+	sudo apt-get install matchbox
+	sudo cp keyboard-cnc.xml /usr/share/matchbox-keyboard
+	sudo chmod a+x /usr/share/matchbox-keyboard/keyboard-cnc.xml
+else
+	echo "Ecran deja installe"
+fi
+
 echo Definition des GPIOs
-# echo 23 | sudo tee $GPIO/export		# Mettre le numéro de la colonne GPIO associé 23 pour 8.13 
-echo 66 | sudo tee $GPIO/export		# P8.03	xlim in	
+# echo 23 | sudo tee $GPIO/export		# Mettre le numéro de la colonne GPIO associé 23 pour 8.13
+echo 66 | sudo tee $GPIO/export		# P8.03	xlim in
 echo 69 | sudo tee $GPIO/export		# P8.05 ylim in
 echo 45 | sudo tee $GPIO/export         # P8.07 zlim in
 
@@ -34,5 +50,3 @@ echo "out" | sudo tee $GPIO/gpio68/direction
 echo "out" | sudo tee $GPIO/gpio44/direction
 
 exit 0
-
-
